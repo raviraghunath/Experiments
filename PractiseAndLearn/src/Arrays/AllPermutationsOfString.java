@@ -5,23 +5,21 @@ import java.util.HashSet;
 public class AllPermutationsOfString {
 
 	public static void main(String[] args) {
-		System.out.println(getDifferentInsertedStrings("a", "bc"));
-		System.out.println(getDifferentInsertedStrings("ab", "c"));
+		System.out.println(method1("abcd", 0));
 	}
 	
-	
-	private static HashSet<String> getPermutations(String s,int pos){
+	private static HashSet<String> method1(String s, int pos){
 		HashSet<String> hashSet=new HashSet<String>();
-		if(pos==s.length()){return hashSet;}
-		String str1 = s.substring(0,pos);
-		String str2 = s.substring(pos);
-		hashSet.addAll(getDifferentInsertedStrings(str1, str2));
-		hashSet.addAll(getPermutations(s, ++pos));
+		if(pos==s.length()-1){hashSet.add(s.substring(pos));return hashSet;}
+		String s1 = String.valueOf(s.charAt(pos));
+		HashSet<String> hashSet1 = method1(s, ++pos);
+		for(String ss:hashSet1){
+			hashSet.addAll(getDifferentInsertedStrings(s1, ss));
+		}
 		return hashSet;
-	}
+	}	
 	
 	private static HashSet<String> getDifferentInsertedStrings(String s1,String s2){
-		System.out.println(s1+","+s2);
 		HashSet<String> hashSet=new HashSet<String>();
 		char[] charArray = s2.toCharArray();
 		hashSet.add(s1+s2);
