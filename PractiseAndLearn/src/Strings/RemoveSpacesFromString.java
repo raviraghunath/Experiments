@@ -4,7 +4,7 @@ package Strings;
 public class RemoveSpacesFromString {
 
 	public static void main(String[] args) {
-		StringBuilder s = new StringBuilder("Hi,How are you da dai?");
+		StringBuilder s = new StringBuilder("  Hi,How are you da dai?");
 		System.out.println("B4 : " + s);
 		method1(s);
 		System.out.println("After : " + s);
