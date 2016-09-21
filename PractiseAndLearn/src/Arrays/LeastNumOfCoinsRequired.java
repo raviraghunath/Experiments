@@ -8,7 +8,7 @@ public class LeastNumOfCoinsRequired {
 	static int A[] = new int[] { 1, 5, 10, 25, 50 };
 
 	public static void main(String[] args) {
-		List<Integer> list = m1(130);
+		List<Integer> list = m1(78);
 		System.out.println(list);
 	}
 

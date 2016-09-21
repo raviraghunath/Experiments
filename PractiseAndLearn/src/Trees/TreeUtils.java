@@ -43,6 +43,32 @@ public class TreeUtils {
 		return node8;
 	}
 
+	public static TreeNode getCurrTree(){
+		TreeNode node5= new TreeNode(5); 
+		TreeNode node8= new TreeNode(8); 
+		TreeNode node9= new TreeNode(9); 
+		TreeNode node12= new TreeNode(12); 
+		TreeNode node2= new TreeNode(2); 
+		TreeNode node7= new TreeNode(7); 
+		TreeNode node4= new TreeNode(4); 
+		TreeNode node1= new TreeNode(1);
+		TreeNode node3= new TreeNode(3);
+
+		node5.left=node8;
+		node5.right=node9;
+
+		node8.left=node12;
+		node8.right=node2;
+		
+		node9.left=node7;
+		node9.right=node4;
+
+		node7.left=node1;
+
+		node4.left=node3;
+
+		return node5;
+	}
 	
 //				8
 //		7		    			12
