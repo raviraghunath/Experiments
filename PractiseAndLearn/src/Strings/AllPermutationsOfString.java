@@ -5,8 +5,8 @@ import java.util.HashSet;
 public class AllPermutationsOfString {
 
 	public static void main(String[] args) {
-		System.out.println(method1("abcde", 0).size());
-		System.out.println(getPermutations("abcde").size());
+		System.out.println(method1("abc", 0));
+		System.out.println(getPermutations("abc"));
 	}
 
 	private static HashSet<String> method1(String s, int pos) {
