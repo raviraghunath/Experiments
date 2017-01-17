@@ -1,11 +1,11 @@
-package Others;
+package DP;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
 //https://www.hackerrank.com/challenges/coin-change?h_r=next-challenge&h_v=zen
-public class CoinChangeProbDP {
+public class CoinChangeProb {
 
 	public static void main(String[] args) throws IOException {
 		Scanner in = new Scanner(System.in);
@@ -36,6 +36,7 @@ public class CoinChangeProbDP {
 				}
 			}
 		}
+		
 		System.out.println(t[size - 1][sum - 1]);
 	}
 }
