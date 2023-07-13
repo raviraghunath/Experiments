@@ -1,0 +1,61 @@
+package Graphs;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class CycleInDirectedGraph {
+
+	public static void main(String[] args) {
+		CycleInDirectedGraph cycleInDirectedGraph = new CycleInDirectedGraph();
+		GraphNode graphNode = GraphUtils.getCyclicGraph();
+		System.out.println(cycleInDirectedGraph.isCyclePresent(graphNode));
+	}
+
+	boolean isCyclePresent(GraphNode graphNode) {
+		Set<GraphNode> visited = new HashSet<>();
+		Set<GraphNode> unVisited = new HashSet<>();
+		Set<GraphNode> visiting = new HashSet<>();
+		populate(graphNode,visited, unVisited);
+		visited = new HashSet<>();
+		boolean res = false;
+		while (!unVisited.isEmpty()) {
+			GraphNode currNode = unVisited.iterator().next();
+			res = isCyclePresent(currNode, visited, unVisited, visiting);
+			if (res)
+				return true;
+		}
+		return false;
+	}
+
+	boolean isCyclePresent(GraphNode currNode, Set<GraphNode> visited, Set<GraphNode> unVisited,
+			Set<GraphNode> visiting) {
+		if (currNode == null) {
+			return false;
+		}
+		visiting.add(currNode);
+		for (GraphNode gNode : currNode.getNodes().keySet()) {
+			if (visiting.contains(gNode)) {
+				return true;
+			} else if (visited.contains(gNode)) {
+				continue;
+			} else {
+				return isCyclePresent(gNode, visited, unVisited, visiting);
+			}
+		}
+		visiting.remove(currNode);
+		unVisited.remove(currNode);
+		visited.add(currNode);
+		return false;
+	}
+
+	void populate(GraphNode src, Set<GraphNode> visited, Set<GraphNode> nonVisited) {
+		nonVisited.add(src);
+		visited.add(src);
+		for (GraphNode graphNode : src.getNodes().keySet()) {
+			if(visited.contains(graphNode)) {
+				continue;
+			}
+			populate(graphNode, visited, nonVisited);
+		}
+	}
+}
