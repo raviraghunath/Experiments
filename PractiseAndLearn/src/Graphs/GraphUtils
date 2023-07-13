@@ -71,4 +71,22 @@ public class GraphUtils {
 
 		return graphNodeA;
 	}
+
+	static GraphNode getCyclicGraph() {
+		GraphNode graphNode1 = new GraphNode(1);
+		GraphNode graphNode2 = new GraphNode(2);
+		// GraphNode graphNode3 = new GraphNode(3);
+		GraphNode graphNode4 = new GraphNode(4);
+		GraphNode graphNode5 = new GraphNode(5);
+		GraphNode graphNode6 = new GraphNode(6);
+
+		graphNode1.addNode(graphNode2, 1);
+		graphNode4.addNode(graphNode1, 1);
+		graphNode4.addNode(graphNode5, 1);
+		graphNode5.addNode(graphNode6, 1);
+		graphNode6.addNode(graphNode4, 4);
+
+		return graphNode4;
+
+	}
 }
