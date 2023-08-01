@@ -1,0 +1,79 @@
+package company;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+//every element of l is within k places of its proper sorted (ascending)
+// position
+// write an algorithm to sort l as efficiently as possible
+public class Company_Appian {
+
+	public static void main(String[] args) {
+
+		int k = 5;
+
+		ArrayList<Integer> l = new ArrayList<>(Arrays.asList(120, 45, 206, 221, 12, 245, 240, 94, 95, 187, 169, 392,
+				347, 366, 360, 370, 270, 437, 446, 450, 396, 487, 416, 431, 489, 496, 444, 453, 481, 578, 627, 550, 704,
+				503, 710, 506, 732, 564, 605, 798, 636, 745, 722, 920, 851, 876, 804, 922, 989, 995));
+
+		Company_Appian company_Appian = new Company_Appian();
+		company_Appian.printArray(l);
+		company_Appian.sort(l, k);
+		company_Appian.printArray(l);
+
+	}
+
+	void sort(ArrayList<Integer> l, int k) {
+		if (l == null || k <= 0) {
+			return;
+		}
+		int[] l1 = new int[k + 1];
+		for (int i = 0; i <= k; i++) {
+			l1[i] = l.get(i);
+		}
+		Arrays.sort(l1);
+		for (int i = 0; i <= k; i++) {
+			l.remove(i);
+			l.add(i, l1[i]);
+		}
+		// printArray(l);
+
+		for (int i = k + 1; i < l.size(); i++) {
+			int ele = l.get(i);
+			ArrayList<Integer> res = insert(l, k, i, ele);
+			replace(l, res, i - k, k);
+			// printArray(l);
+		}
+
+	}
+
+	void printArray(ArrayList<Integer> l) {
+		for (int i = 0; i < l.size(); i++) {
+			System.out.print(l.get(i) + " , ");
+		}
+		System.out.println();
+	}
+
+	void replace(ArrayList<Integer> l, ArrayList<Integer> l1, int startPos, int k) {
+
+		for (int i = 0; i < l1.size(); i++) {
+			l.remove(startPos);
+			l.add(startPos++, l1.get(i));
+		}
+	}
+
+	ArrayList<Integer> insert(ArrayList<Integer> l, int k, int currpos, int ele) {
+		ArrayList<Integer> res = new ArrayList<>();
+		boolean isPosFound = false;
+		for (int i = currpos - k; i < currpos; i++) {
+			if (!isPosFound && l.get(i) > ele) {
+				res.add(ele);
+				res.add(l.get(i));
+				isPosFound = true;
+			} else {
+				res.add(l.get(i));
+			}
+		}
+		return res;
+	}
+}
