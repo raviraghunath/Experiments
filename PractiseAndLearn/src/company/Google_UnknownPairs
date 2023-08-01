@@ -1,0 +1,57 @@
+package Experiment;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+public class Google_UnknownPairs {
+
+	public static void main(String[] args) {
+		Google_UnknownPairs unknownPairs = new Google_UnknownPairs();
+
+		Map<Integer, Set<Integer>> knownPairs = new HashMap<>();
+		knownPairs.put(0, new HashSet<>(Arrays.asList( 2)));
+		knownPairs.put(1, new HashSet<>(Arrays.asList(2)));
+		knownPairs.put(2, new HashSet<>(Arrays.asList(0, 1)));
+		knownPairs.put(3, new HashSet<>(Arrays.asList(4, 5)));
+		knownPairs.put(4, new HashSet<>(Arrays.asList(3)));
+		knownPairs.put(5, new HashSet<>(Arrays.asList(3)));
+
+		Set<Set<Integer>> set = unknownPairs.getUnknownPais(6, knownPairs);
+		for (Set<Integer> integers : set) {
+			for (Integer i : integers) {
+				System.out.print(i + ",");
+			}
+			System.out.println();
+		}
+	}
+
+	Set<Set<Integer>> getUnknownPais(int N, Map<Integer, Set<Integer>> knownPairs) {
+		Set<Integer> processed = new HashSet<>();
+		Set<Set<Integer>> res = new HashSet<>();
+		for (int i = 0; i < N; i++) {
+			if (!processed.contains(i)) {
+				Set<Integer> currSet = getKnownPairs(i, knownPairs, new HashSet<>());
+				processed.addAll(currSet);
+				res.add(currSet);
+			}
+		}
+		return res;
+	}
+
+	Set<Integer> getKnownPairs(int curr, Map<Integer, Set<Integer>> knownPairs, Set<Integer> knownPersons) {
+		knownPersons.add(curr);
+		Set<Integer> directs = knownPairs.get(curr);
+		if (null != directs) {
+			for (Integer direct : directs) {
+				if (!knownPersons.contains(direct)) {
+					knownPersons.addAll(getKnownPairs(direct, knownPairs, knownPersons));
+				}
+			}
+		}
+		return knownPersons;
+	}
+
+}
