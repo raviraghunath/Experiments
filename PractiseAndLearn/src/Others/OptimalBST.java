@@ -1,5 +1,4 @@
-package Experiment;
-
+package Others;
 public class OptimalBST {
 
 	public static void main(String[] args) {

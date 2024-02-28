@@ -1,5 +1,4 @@
-package Experiment;
-
+package Others;
 public class LCS {
 	public static void main(String[] args) {
 		LCS lcs = new LCS();

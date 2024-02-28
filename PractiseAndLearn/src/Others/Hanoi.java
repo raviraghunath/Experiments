@@ -1,5 +1,4 @@
-package Experiment;
-
+package Others;
 public class Hanoi {
 
 	public void toh(int N, int from, int to, int aux) {
